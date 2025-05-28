@@ -1,4 +1,54 @@
 # SimpL-Social: System Design for Real-Time Features & Image Handling
+### Backend
+
+To start the backend server:
+
+```bash
+npm install
+npm run dev
+```
+
+This will typically start the frontend server on
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+This will typically start the backend server on `http://localhost:5000` (or the port specified in your `.env` file).
+
+## Project Structure
+
+```
+SimpL/
+├── backend/         # Backend Node.js application
+│   ├── controllers/   # Request handlers
+│   ├── db/            # Database connection logic
+│   ├── lib/           # Utility functions
+│   ├── middleware/    # Express middleware
+│   ├── models/        # Mongoose models
+│   ├── routes/        # API routes
+│   ├── server.js      # Main backend server file
+│   └── socket/        # Socket.io setup
+├── frontend/        # Frontend React application
+│   ├── public/        # Static assets
+│   ├── src/           # Frontend source code
+│   │   ├── components/  # Reusable UI components
+│   │   ├── context/     # React context providers
+│   │   ├── hooks/       # Custom React hooks
+│   │   ├── pages/       # Page components
+│   │   ├── App.jsx      # Main application component
+│   │   ├── main.jsx     # Entry point for React app
+│   │   └── index.css    # Global styles
+│   ├── package.json   # Frontend dependencies and scripts
+│   └── ...
+├── .gitignore
+├── Dockerfile
+├── README.md        # This file
+└── package.json     # Root package.json (if any, for monorepo tools like Lerna/Nx)
+```
+
+Make sure both the frontend and backend servers are running concurrently for the application to function correctly.
 
 This document outlines the system design for real-time features (notifications, live updates) and image handling within the SimpL-Social application.
 
