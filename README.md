@@ -1,6 +1,12 @@
 # SimpL-Social: System Design for Real-Time Features & Image Handling
-### Backend
 
+Checkout the ``socketonline`` branch for the latest version of the project:
+```bash
+   https://github.com/theashu02/SimpL-Social
+```
+```bash
+   https://github.com/theashu02/SimpL-Social.git
+```
 To start the backend server:
 
 ```bash
@@ -8,7 +14,8 @@ npm install
 npm run dev
 ```
 
-This will typically start the frontend server on
+This will typically start the frontend server on:
+
 ```bash
 cd frontend
 npm install
