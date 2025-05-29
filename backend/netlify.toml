@@ -1,7 +1,7 @@
 [build]
   command = "npm install"
   functions = "netlify/functions"
-  publish = "public" # This might not be strictly necessary if you don't have static assets to serve from the backend directly
+  # This might not be strictly necessary if you don't have static assets to serve from the backend directly
 
 [functions]
   included_files = ["**/*"] # Include all files needed by your function, adjust if necessary
