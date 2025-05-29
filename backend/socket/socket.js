@@ -3,17 +3,10 @@ import http from "http";
 import express from "express";
 
 const app = express();
-app.use(
-	cors({
-	  origin: "https://simp-lx.vercel.app", 
-	  credentials: true, 
-	  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-	})
-  );
 const server = http.createServer(app);
 const io = new Server(server, {
 	cors: {
-		origin: "https://simp-lx.vercel.app",
+		origin: "*",
 		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 	},
 });

@@ -13,6 +13,7 @@ import notificationRoutes from "./routes/notification.route.js";
 
 import connectMongoDB from "./db/connectMongoDB.js";
 import { initializeSocketIO } from "./socket/socket.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -23,10 +24,17 @@ cloudinary.config({
 });
 
 const app = express();
+app.use(
+	cors({
+	  origin: "*", 
+	  credentials: true, 
+	  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+	})
+);
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
 	cors: {
-		origin: "https://simp-lx.vercel.app",
+		origin: "*",
 		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 	},
 });
