@@ -189,11 +189,11 @@ const Post = ({ post }) => {
                 id={`comments_modal${post._id}`}
                 className="modal border-none outline-none"
               >
-                <div className="modal-box rounded border border-gray-600">
+                <div className="modal-box rounded border border-gray-600 bg-gray-800 text-[#f4f4f4] p-3">
                   <h3 className="font-bold text-lg mb-4">COMMENTS</h3>
                   <div className="flex flex-col gap-3 max-h-60 overflow-auto">
                     {post.comments.length === 0 && (
-                      <p className="text-sm text-slate-500">
+                      <p className="text-sm text-white">
                         No comments yet 🤔 Be the first one 😉
                       </p>
                     )}
@@ -228,18 +228,18 @@ const Post = ({ post }) => {
                     onSubmit={handlePostComment}
                   >
                     <textarea
-                      className="textarea w-full p-1 rounded text-md resize-none border focus:outline-none  border-gray-800"
+                      className="textarea w-full p-1 rounded text-md resize-none border focus:outline-none text-black border-gray-800"
                       placeholder="Add a comment..."
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
                     />
-                    <button className="btn btn-primary rounded-full btn-sm text-white px-4">
+                    <button className="btn btn-primary rounded-full btn-sm text-black px-4 p-3 bg-amber-300">
                       {isCommenting ? <LoadingSpinner size="md" /> : "Post"}
                     </button>
                   </form>
                 </div>
-                <form method="dialog" className="modal-backdrop">
-                  <button className="outline-none">close</button>
+                <form method="dialog" className="modal-backdrop p-3 bg-gray-600">
+                  <button className="outline-none bg-amber-400 p-3 rounded-xl">close</button>
                 </form>
               </dialog>
               <div className="flex gap-1 items-center group cursor-pointer">
