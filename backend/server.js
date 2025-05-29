@@ -26,8 +26,8 @@ const app = express();
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
 	cors: {
-		origin: "*",
-		methods: ["GET", "POST"],
+		origin: "https://simp-lx.vercel.app",
+		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 	},
 });
 
