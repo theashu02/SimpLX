@@ -21,6 +21,14 @@ cd frontend
 npm install
 npm run dev
 ```
+Feature Test:
+```bash
+   https://drive.google.com/file/d/17gRJWHMpJwwhD7lcYRXh4XHQF3dOUlTR/view?usp=sharing
+```
+Room Test:
+```bash
+   https://drive.google.com/file/d/1Gv46OfJ8vXK16d6SNPKgK1ZU1Oe7D3ck/view?usp=sharing
+```
 
 This will typically start the backend server on `http://localhost:5000` (or the port specified in your `.env` file).
 
