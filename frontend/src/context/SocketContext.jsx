@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import io from "socket.io-client";
+import { SOCKET_URL } from "../URL.js";
 
 const SocketContext = createContext();
 
@@ -19,7 +20,9 @@ export const SocketContextProvider = ({ children }) => {
     const [newPostFromSocket, setNewPostFromSocket] = useState(null);
 
     useEffect(() => {
-        const newSocket = io(import.meta.env.VITE_SOCKET_URL);
+        const newSocket = io(SOCKET_URL, {
+            withCredentials: true,
+        });
         setSocket(newSocket);
 
         newSocket.on("getOnlineUsers", (users) => {
