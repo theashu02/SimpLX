@@ -19,7 +19,7 @@ export const SocketContextProvider = ({ children }) => {
     const [newPostFromSocket, setNewPostFromSocket] = useState(null);
 
     useEffect(() => {
-        const newSocket = io("http://localhost:5000");
+        const newSocket = io(import.meta.env.VITE_SOCKET_URL);
         setSocket(newSocket);
 
         newSocket.on("getOnlineUsers", (users) => {

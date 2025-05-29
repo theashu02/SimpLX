@@ -1,11 +1,10 @@
 {
-  "name": "twitter_clone",
+  "name": "simplx",
   "version": "1.0.0",
-  "main": "backend/server.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon backend/server.js",
-    "start": "cross-env node backend/server.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "dev": "nodemon server.js",
+    "start": "cross-env node server.js"
   },
   "keywords": [],
   "author": "",
