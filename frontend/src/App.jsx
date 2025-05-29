@@ -125,7 +125,7 @@ function App() {
 
   return (
     <>
-      <div className="flex max-w-6xl mx-auto">
+      <div className="flex max-w-7xl mx-auto bg-gray-900">
         {authUser && <Sidebar />}
         <Routes>
           <Route

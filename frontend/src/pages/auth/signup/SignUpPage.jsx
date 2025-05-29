@@ -56,7 +56,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto flex h-screen px-10">
+    <div className="max-w-screen-xl mx-auto flex h-screen px-10 bg-gray-900">
       <div className="flex-1 hidden lg:flex items-center  justify-center">
         {/* <XSvg className=" lg:w-2/3 fill-white" /> */}
         <img src={myIcon} alt="My Icon" className="lg:w-2/3" />
@@ -78,11 +78,11 @@ const SignUpPage = () => {
             <h1 className="text-4xl font-extrabold text-white">Register</h1>
           </div>
 
-          <label className="input input-bordered rounded flex items-center gap-2">
+          <label className="input input-bordered rounded flex items-center gap-2  p-2 bg-gray-300">
             <MdOutlineMail />
             <input
               type="email"
-              className="grow"
+               className="grow bg-transparent text-black"
               placeholder="Email"
               name="email"
               onChange={handleInputChange}
@@ -90,22 +90,22 @@ const SignUpPage = () => {
             />
           </label>
           <div className="flex gap-4 flex-wrap">
-            <label className="input input-bordered rounded flex items-center gap-2 flex-1">
+            <label className="input input-bordered rounded flex items-center gap-2 flex-1 p-2 bg-gray-300">
               <FaUser />
               <input
                 type="text"
-                className="grow "
+                className="grow bg-transparent text-black"
                 placeholder="Username"
                 name="username"
                 onChange={handleInputChange}
                 value={formData.username}
               />
             </label>
-            <label className="input input-bordered rounded flex items-center gap-2 flex-1">
+            <label className="input input-bordered rounded flex items-center gap-2 flex-1 p-2 bg-gray-300">
               <MdDriveFileRenameOutline />
               <input
                 type="text"
-                className="grow"
+                 className="grow bg-transparent text-black"
                 placeholder="Full Name"
                 name="fullName"
                 onChange={handleInputChange}
@@ -113,18 +113,18 @@ const SignUpPage = () => {
               />
             </label>
           </div>
-          <label className="input input-bordered rounded flex items-center gap-2">
+          <label className="input input-bordered rounded flex items-center gap-2 p-2 bg-gray-300">
             <MdPassword />
             <input
               type="password"
-              className="grow"
+               className="grow bg-transparent text-black"
               placeholder="Password"
               name="password"
               onChange={handleInputChange}
               value={formData.password}
             />
           </label>
-          <button className="btn rounded-full btn-primary text-white">
+          <button className="btn rounded-full btn-primary text-black p-2 bg-gray-300">
             {isPending ? "Loading..." : "Sign up"}
           </button>
           {isError && <p className="text-red-500">{error.message}</p>}
@@ -132,7 +132,7 @@ const SignUpPage = () => {
         <div className="flex flex-col lg:w-2/3 gap-2 mt-4">
           <p className="text-white text-lg">Already have an account?</p>
           <Link to="/login">
-            <button className="btn rounded-full btn-primary text-white btn-outline w-full">
+            <button className="btn rounded-full btn-primary text-black btn-outline w-full p-2 bg-gray-300">
               Sign in
             </button>
           </Link>

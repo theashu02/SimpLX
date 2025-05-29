@@ -29,7 +29,7 @@ const RightPanel = () => {
   if (suggestedUsers?.length === 0) return <div className="md:w-64 w-0"></div>;
 
   return (
-    <div className="hidden lg:block my-4 mx-2">
+    <div className="hidden lg:block my-4 mx-2 bg-gray-900 text-[#f4f4f4]">
       <div className="bg-[#16181C] p-4 rounded-md sticky top-2">
         <div className="flex items-center gap-2 mb-4 pb-2 border-b border-gray-700">
           <FaUsers className="text-green-500 w-5 h-5" />
@@ -72,7 +72,7 @@ const RightPanel = () => {
                 </div>
                 <div>
                   <button
-                    className="btn bg-white text-black hover:bg-white hover:opacity-90 rounded-full btn-sm"
+                    className="btn bg-green-300 text-black p-2 text-xs hover:bg-white hover:opacity-90 rounded-full btn-sm"
                     onClick={(e) => {
                       e.preventDefault();
                       console.log("Clicked")

@@ -53,7 +53,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto flex h-screen">
+    <div className="max-w-screen-xl mx-auto flex h-screen bg-gray-900">
       <div className="flex-1 hidden lg:flex items-center  justify-center">
         <img src={myIcon} alt="My Icon" className="lg:w-2/3" />
       </div>
@@ -70,30 +70,30 @@ const LoginPage = () => {
             <h1 className="text-4xl font-extrabold text-white">Login</h1>
           </div>
 
-          <label className="input input-bordered rounded flex items-center gap-2">
-            <MdOutlineMail />
+          <label className="input input-bordered rounded flex items-center gap-2 p-2 bg-gray-300">
+            <MdOutlineMail className="text-" />
             <input
               type="text"
-              className="grow"
+              className="grow bg-transparent text-black"
               placeholder="username"
               name="username"
               onChange={handleInputChange}
-              value={formData.username}
+              value={formData.username} 
             />
           </label>
 
-          <label className="input input-bordered rounded flex items-center gap-2">
+          <label className="input input-bordered rounded flex items-center gap-2 p-2 bg-gray-300">
             <MdPassword />
             <input
               type="password"
-              className="grow"
+              className="grow bg-transparent text-black"
               placeholder="Password"
               name="password"
               onChange={handleInputChange}
               value={formData.password}
             />
           </label>
-          <button className="btn rounded-full btn-primary text-white">
+          <button className="btn rounded-full btn-primary text-black bg-gray-400 p-3 ">
             {isPending ? "Loading..." : "Login"}
           </button>
           {isError && <p className="text-red-500">{error.message}</p>}
@@ -101,7 +101,7 @@ const LoginPage = () => {
         <div className="flex flex-col gap-2 mt-4">
           <p className="text-white text-lg">{"Don't"} have an account?</p>
           <Link to="/signup">
-            <button className="btn rounded-full btn-primary text-white btn-outline w-full">
+            <button className="btn rounded-full btn-primary text-black btn-outline w-full bg-gray-400 p-3">
               Sign up
             </button>
           </Link>

@@ -71,7 +71,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <div className="flex-[4_4_0]  border-r border-gray-700 min-h-screen ">
+      <div className="flex-[4_4_0]  border-r border-gray-700 min-h-screen text-white">
         {/* HEADER */}
         {(isLoading || isRefetching) && <ProfileHeaderSkeleton />}
         {!isLoading && !isRefetching && !user && (
@@ -146,7 +146,7 @@ const ProfilePage = () => {
                 {isMyProfile && <EditProfileModal authUser={authUser} />}
                 {!isMyProfile && (
                   <button
-                    className="btn btn-outline rounded-full btn-sm"
+                    className="btn btn-outline rounded-full btn-sm p-2 bg-amber-400 px-3 text-black"
                     onClick={() => follow(user?._id)}
                   >
                     {isPending && "Loading..."}
