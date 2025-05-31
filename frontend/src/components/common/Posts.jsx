@@ -30,7 +30,11 @@ const Posts = ({ feedType, username, userId }) => {
     queryKey: ["posts"],
     queryFn: async () => {
       try {
-        const res = await fetch(POST_ENDPOINT);
+        const res = await fetch(POST_ENDPOINT, {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
         const data = await res.json();
 
         if (!res.ok) {

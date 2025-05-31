@@ -35,7 +35,11 @@ const ProfilePage = () => {
     queryKey: ["userProfile"],
     queryFn: async () => {
       try {
-        const res = await fetch(`/api/users/profile/${username}`);
+        const res = await fetch(`/api/users/profile/${username}`, {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
         const data = await res.json();
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");
@@ -45,6 +49,7 @@ const ProfilePage = () => {
         throw new Error(error);
       }
     },
+    staleTime: Infinity,
   });
 
   const { isUpdatingProfile, updateProfile } = useUpdateUserProfile();

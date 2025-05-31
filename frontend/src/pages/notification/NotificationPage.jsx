@@ -20,7 +20,11 @@ const NotificationPage = () => {
     queryKey: ["notifications"],
     queryFn: async () => {
       try {
-        const res = await fetch("/api/notifications");
+        const res = await fetch("/api/notifications", {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Something went wrong");
         return data;
