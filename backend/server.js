@@ -13,11 +13,17 @@ import notificationRoutes from "./routes/notification.route.js";
 
 import connectMongoDB from "./db/connectMongoDB.js";
 import { initializeSocketIO } from "./socket/socket.js";
-import cors from "cors";
+// CORS for Express is not strictly needed if frontend is served from the same origin
+// and all API calls are relative. If you need to allow other origins for API calls,
+// you can re-enable it with appropriate configuration.
+// import cors from "cors";
 
 dotenv.config();
 
-const FRONTEND_URL = process.env.FRONTEND_URL;
+// For Render, set this environment variable in the Render dashboard
+// to your service's URL, e.g., https://your-app-name.onrender.com
+// It can be a comma-separated list if you need to allow multiple origins for Socket.IO.
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000"; // Fallback for local dev
 
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -26,30 +32,24 @@ cloudinary.config({
 });
 
 const app = express();
-app.use(
-	cors({
-	  origin: FRONTEND_URL, 
-	  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-	  credentials: true, // Important for cookies
-	})
-);
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
 	cors: {
-		origin: FRONTEND_URL,
+		origin: FRONTEND_URL.split(',').map(url => url.trim()), // Allow multiple origins, trim whitespace
 		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-		credentials: true, // Important for cookies
+		credentials: true,
 	},
 });
 
 initializeSocketIO(io);
 
 const PORT = process.env.PORT || 5000;
+// path.resolve() gives the project root if server.js is run from there (e.g. `node backend/server.js`)
 const __dirname = path.resolve();
 
-app.use(express.json({ limit: "5mb" })); // to parse req.body
-// limit shouldn't be too high to prevent DOS
-app.use(express.urlencoded({ extended: true })); // to parse form data(urlencoded)
+
+app.use(express.json({ limit: "5mb" }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
@@ -58,35 +58,27 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/notifications", notificationRoutes);
 
-// Connect to MongoDB when the module is loaded if not in a serverless environment trigger
-// For serverless, we will call connectMongoDB from the handler.
-// However, it's better to ensure it's connected before handler exports.
+connectMongoDB();
 
-// Let's try connecting immediately. If this causes issues with local dev, we can refine.
-connectMongoDB(); 
+// Serve static files from frontend build
+// NODE_ENV is set to "production" by Render automatically.
+if (process.env.NODE_ENV === "production") {
+    const frontendDistPath = path.join(__dirname, "frontend", "dist");
+	app.use(express.static(frontendDistPath));
 
-// if (process.env.NODE_ENV === "production") { // This was for monolithic serving
-// 	app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
-// 	app.get("*", (req, res) => {
-// 		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-// 	});
-// }
-
-// Only listen if not in a serverless environment (Netlify defines LAMBDA_TASK_ROOT)
-if (!process.env.LAMBDA_TASK_ROOT) {
-  httpServer.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    // connectMongoDB(); // Moved up to ensure connection for serverless too
-  });
+	// For any other route, serve index.html from the frontend build directory
+	// This is crucial for client-side routing (e.g., React Router).
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(frontendDistPath, "index.html"));
+	});
 }
 
-export default app; // Export app for serverless handler
-// If socket.io needs the httpServer instance directly for serverless-http, we might need to export it too
-// or handle socket.io initialization differently for serverless.
-// For now, serverless-http usually works with the Express app instance for HTTP requests.
-// Socket.IO might need a different setup for serverless if not using a managed service.
+// Start the server
+httpServer.listen(PORT, "0.0.0.0", () => {
+	console.log(`Server listening on port ${PORT}`);
+	console.log(`Attempting to serve frontend from: ${path.join(__dirname, "frontend", "dist", "index.html")}`);
+    console.log(`Socket.IO CORS configured for origins: ${FRONTEND_URL}`);
+});
 
-// Let's re-evaluate socket.io. Netlify functions are stateless. Long-lived socket connections will be an issue.
-// You might need a managed WebSocket service or a different approach for real-time features on Netlify functions.
-// For now, we focus on getting HTTP part working.
+// The export default app; is removed as it's not needed when starting the server directly.
+// Comments related to serverless (Netlify) can be removed if this project is solely targeting Render.

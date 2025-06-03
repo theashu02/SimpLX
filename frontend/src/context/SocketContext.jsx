@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import io from "socket.io-client";
-import { SOCKET_URL } from "../URL.js";
 
 const SocketContext = createContext();
 
@@ -20,7 +19,7 @@ export const SocketContextProvider = ({ children }) => {
     const [newPostFromSocket, setNewPostFromSocket] = useState(null);
 
     useEffect(() => {
-        const newSocket = io(SOCKET_URL, {
+        const newSocket = io("http://localhost:5000", {
             withCredentials: true,
         });
         setSocket(newSocket);

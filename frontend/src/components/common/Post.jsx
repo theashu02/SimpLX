@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 
 import LoadingSpinner from "./LoadingSpinner";
 import { formatPostDate } from "../../utils/date/index";
-import { API_BASE_URL } from "../../URL";
 
 const Post = ({ post }) => {
   const [comment, setComment] = useState("");
@@ -27,7 +26,7 @@ const Post = ({ post }) => {
   const { mutate: deletePost, isPending: isDeleting } = useMutation({
     mutationFn: async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/posts/${post._id}`, {
+        const res = await fetch(`/api/posts/${post._id}`, {
           method: "DELETE",
           credentials: 'include',
         });
@@ -50,7 +49,7 @@ const Post = ({ post }) => {
   const { mutate: likePost, isPending: isLiking } = useMutation({
     mutationFn: async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/posts/like/${post._id}`, {
+        const res = await fetch(`/api/posts/like/${post._id}`, {
           method: "POST",
           credentials: 'include',
         });
@@ -84,7 +83,7 @@ const Post = ({ post }) => {
   const { mutate: commentPost, isPending: isCommenting } = useMutation({
     mutationFn: async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/posts/comment/${post._id}`, {
+        const res = await fetch(`/api/posts/comment/${post._id}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

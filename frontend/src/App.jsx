@@ -13,11 +13,9 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import { useEffect } from "react";
 import { useSocketContext } from "./context/SocketContext.jsx";
-import { API_BASE_URL } from "./URL.js";
 
 function App() {
   const queryClient = useQueryClient();
-  console.log("API_BASE_URL--->", API_BASE_URL);
   const {
     data: authUser,
     isLoading
@@ -25,7 +23,7 @@ function App() {
     queryKey: ["authUser"],
     queryFn: async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/auth/me`, { 
+        const res = await fetch(`/api/auth/me`, { 
           credentials: 'include',
           headers: {
             'Cache-Control': 'no-cache',
