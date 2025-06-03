@@ -22,8 +22,7 @@ dotenv.config();
 
 // For Render, set this environment variable in the Render dashboard
 // to your service's URL, e.g., https://your-app-name.onrender.com
-// It can be a comma-separated list if you need to allow multiple origins for Socket.IO.
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000"; // Fallback for local dev
+// It can be a comma-separated list if you need to allow multiple origins for Socket.IO. // Fallback for local dev
 
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -35,7 +34,7 @@ const app = express();
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
 	cors: {
-		origin: FRONTEND_URL.split(',').map(url => url.trim()), // Allow multiple origins, trim whitespace
+		origin: "*", // Allow multiple origins, trim whitespace
 		methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 		credentials: true,
 	},
@@ -77,7 +76,7 @@ if (process.env.NODE_ENV === "production") {
 httpServer.listen(PORT, "0.0.0.0", () => {
 	console.log(`Server listening on port ${PORT}`);
 	console.log(`Attempting to serve frontend from: ${path.join(__dirname, "frontend", "dist", "index.html")}`);
-    console.log(`Socket.IO CORS configured for origins: ${FRONTEND_URL}`);
+    console.log(`Socket.IO CORS configured for origins: "*"`);
 });
 
 // The export default app; is removed as it's not needed when starting the server directly.
